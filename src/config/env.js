@@ -6,20 +6,20 @@
  * baseImgPath: 图片存放地址
  * 
  */
-let baseUrl = ''; 
+let baseUrl = '';
 let routerMode = 'hash';
 let baseImgPath;
 
 if (process.env.NODE_ENV == 'development') {
-	baseUrl = '';
+    baseUrl = 'http://127.0.0.1:4000';
     baseImgPath = '/img/';
-}else{
-	baseUrl = '//elm.cangdu.org';
+} else {
+    baseUrl = '//elm.cangdu.org';
     baseImgPath = '//elm.cangdu.org/img/';
 }
 
 export {
-	baseUrl,
-	routerMode,
-	baseImgPath
+    baseUrl,
+    routerMode,
+    baseImgPath
 }
