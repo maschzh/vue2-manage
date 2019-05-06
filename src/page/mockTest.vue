@@ -24,7 +24,7 @@
 						<el-button type="primary" @click="submitForm('formData')" v-loading.fullscreen.lock="fullscreenLoading">立即测试</el-button>
 					</el-form-item>
 					<el-form-item label="返回结果">
-						<span>{{result}}</span>
+						<span >{{result}}</span>
 					</el-form-item>
 				</el-form>
   			</el-col>
@@ -43,7 +43,7 @@
 					address: '', //地址
 					parameter:'',
 					type:'',
-				},
+                },
 				types:[{
 						value: 'GET',
 		        label: 'GET'
@@ -59,8 +59,8 @@
 				}],
 				result:[],	
 			  	baseUrl,
-				baseImgPath, 
-				fullscreenLoading:false,
+                baseImgPath, 
+                fullscreenLoading:false,
 			}
     	},
     	components: {
@@ -70,25 +70,24 @@
     		this.initData();
     	},
     	methods: {
-			initData(){
-                this.formData.address = window.localStorage.getItem("api_address");
-				this.formData.type = window.localStorage.getItem("api_type");
-				this.result =[];
-				this.fullscreenLoading = false;
+            initData(){
+                this.formData.address = window.localStorage.getItem("encrypt_address");
+                this.formData.type = window.localStorage.getItem("encrypt_type");
+                this.result =[];
+                this.fullscreenLoading = false;
             },
 			async submitForm(){
-				this.fullscreenLoading = true;
-				let parameter = {};
+                this.fullscreenLoading = true;
+                let parameter = {};
 				if (this.formData.parameter){
 					parameter =JSON.parse(this.formData.parameter);
 				}
-				
 				try{
-					let result = await getMOInfo(this.formData.address,parameter,this.formData.type);
-					this.result = result;	
-					this.fullscreenLoading = false;
-					window.localStorage.setItem("api_address", this.formData.address);
-                	window.localStorage.setItem("api_type", this.formData.type);	
+					let result = await getMOInfo(this.formData.address, parameter,this.formData.type);
+                    this.result = result;	
+                    this.fullscreenLoading = false;
+                    window.localStorage.setItem("encrypt_address", this.formData.address);
+                    window.localStorage.setItem("encrypt_type", this.formData.type);	
 				}catch(err){
 					console.log(err);
 				}
@@ -133,4 +132,3 @@
 	    background: #e2f0e4;
 	}
 </style>
-

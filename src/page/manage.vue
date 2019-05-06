@@ -16,6 +16,7 @@
 						<template slot="title"><i class="el-icon-plus"></i>接口测试</template>
 						<el-menu-item index="encryptTest">加解密</el-menu-item>
 						<el-menu-item index="apiTest">接口测试</el-menu-item>
+						<el-menu-item index="mockTest">MOCK数据</el-menu-item>
 					</el-submenu>
 					<!-- <el-submenu index="4">
 						<template slot="title"><i class="el-icon-star-on"></i>图表</template>

@@ -229,3 +229,5 @@ export const getUserCity = () => fetch('/v1/user/city/count');
 
 
 export const getMOInfo = (url, data, method) => fetch(url, data, method);
+
+export const mockData = () => fetch(url, method)

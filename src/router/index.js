@@ -8,6 +8,7 @@ const manage = r => require.ensure([], () => r(require('@/page/manage')), 'manag
 const home = r => require.ensure([], () => r(require('@/page/home')), 'home');
 const encryptTest = r => require.ensure([], () => r(require('@/page/encryptTest')), 'encryptTest');
 const apiTest = r => require.ensure([], () => r(require('@/page/apiTest')), 'apiTest');
+const mockTest = r => require.ensure([], () => r(require('@/page/mockTest')), 'mockTest');
 
 const routes = [{
         path: '/',
@@ -30,6 +31,11 @@ const routes = [{
                 path: '/apiTest',
                 component: apiTest,
                 meta: ['接口测试', 'APITEST'],
+            },
+            {
+                path: '/mockTest',
+                component: mockTest,
+                meta: ['接口测试', 'MOCKTEST'],
             },
         ]
     }

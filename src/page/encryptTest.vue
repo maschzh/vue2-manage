@@ -3,7 +3,7 @@
         <head-top></head-top>
         <el-row style="margin-top: 20px;">
   			<el-col :span="12" :offset="4">
-		        <el-form :model="formData" :rules="rules" ref="formData" label-width="110px" class="demo-formData">
+		        <el-form :model="formData"  ref="formData" label-width="110px" class="demo-formData">
 					<el-form-item label="接口地址" prop="address">
 						<el-input v-model="formData.address"></el-input>
 					</el-form-item>
@@ -20,11 +20,11 @@
 					<el-form-item label="接口参数" prop="parameter">
 						<el-input v-model="formData.parameter"></el-input>
 					</el-form-item>
+					<el-form-item class="button_submit">
+						<el-button type="primary" @click="submitForm('formData')" v-loading.fullscreen.lock="fullscreenLoading">立即测试</el-button>
+					</el-form-item>
 					<el-form-item label="返回结果">
 						<span>{{result}}</span>
-					</el-form-item>
-					<el-form-item class="button_submit">
-						<el-button type="primary" @click="submitForm('formData')">立即测试</el-button>
 					</el-form-item>
 				</el-form>
   			</el-col>
@@ -43,7 +43,7 @@
 					address: '', //地址
 					parameter:'',
 					type:'',
-		        },
+                },
 				types:[{
 						value: 'GET',
 		        label: 'GET'
@@ -59,7 +59,8 @@
 				}],
 				result:[],	
 			  	baseUrl,
-				baseImgPath, 
+                baseImgPath, 
+                fullscreenLoading: false,
 			}
     	},
     	components: {
@@ -72,13 +73,21 @@
             initData(){
                 this.formData.address = window.localStorage.getItem("encrypt_address");
                 this.formData.type = window.localStorage.getItem("encrypt_type");
+                this.result =[];
+                this.fullscreenLoading = false;
             },
 			async submitForm(){
-                window.localStorage.setItem("encrypt_address", this.formData.address);
-                window.localStorage.setItem("encrypt_type", this.formData.type);
+                this.fullscreenLoading = true;
+                let parameter = {};
+				if (this.formData.parameter){
+					parameter =JSON.parse(this.formData.parameter);
+				}
 				try{
-					let result = await getMOInfo(this.formData.address, null,this.formData.type);
-					this.result = result;		
+					let result = await getMOInfo(this.formData.address, parameter,this.formData.type);
+                    this.result = result;
+                    this.fullscreenLoading = false;	
+                    window.localStorage.setItem("encrypt_address", this.formData.address);
+                    window.localStorage.setItem("encrypt_type", this.formData.type);	
 				}catch(err){
 					console.log(err);
 				}
