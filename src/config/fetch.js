@@ -25,7 +25,7 @@ export default async(url = '', data = {}, type = 'GET', method = 'fetch') => {
                 'Content-Type': 'application/json'
             },
             mode: "cors",
-            cache: "force-cache"
+            // cache: "force-cache"
         }
 
         if (type == 'POST') {
@@ -37,9 +37,9 @@ export default async(url = '', data = {}, type = 'GET', method = 'fetch') => {
         try {
             const response = await fetch(url, requestConfig);
             const responseJson = await response.json();
-            return responseJson
+            return responseJson;
         } catch (error) {
-            throw new Error(error)
+            throw new Error(error);
         }
     } else {
         return new Promise((resolve, reject) => {

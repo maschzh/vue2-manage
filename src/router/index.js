@@ -9,6 +9,7 @@ const home = r => require.ensure([], () => r(require('@/page/home')), 'home');
 const encryptTest = r => require.ensure([], () => r(require('@/page/encryptTest')), 'encryptTest');
 const apiTest = r => require.ensure([], () => r(require('@/page/apiTest')), 'apiTest');
 const mockTest = r => require.ensure([], () => r(require('@/page/mockTest')), 'mockTest');
+const todoList = r => require.ensure([], () => r(require('@/page/todoList')), 'todoList');
 
 const routes = [{
         path: '/',
@@ -37,6 +38,11 @@ const routes = [{
                 component: mockTest,
                 meta: ['接口测试', 'MOCKTEST'],
             },
+            {
+                path: '/todoList',
+                component: todoList,
+                meta: ['接口测试', 'TODOLIST']
+            }
         ]
     }
 ]

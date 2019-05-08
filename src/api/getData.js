@@ -231,3 +231,13 @@ export const getUserCity = () => fetch('/v1/user/city/count');
 export const getMOInfo = (url, data, method) => fetch(url, data, method);
 
 export const mockData = () => fetch(url, method)
+
+/**
+ * 获取TodoList
+ */
+export const getTodoList = (data) => fetch('/todos', data, 'POST')
+
+export const getTodoListCount = () => fetch('/todos/count');
+export const getAllTodo = () => fetch('/todos');
+export const deleteTodo = todo_id => fetch('/todo/delete/' + todo_id, {}, 'POST')
+export const updateTodo = data => fetch('/todo/update', data, 'POST')

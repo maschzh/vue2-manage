@@ -12,6 +12,10 @@
 						<el-menu-item index="orderList">订单列表</el-menu-item>
 						<el-menu-item index="adminList">管理员列表</el-menu-item>
 					</el-submenu> -->
+					<el-submenu index="2">
+						<template slot="title"><i class="el-icon-document"></i>数据管理</template>
+						<el-menu-item index="todoList">TODOLIST</el-menu-item>
+					</el-submenu>
 					<el-submenu index="3">
 						<template slot="title"><i class="el-icon-plus"></i>接口测试</template>
 						<el-menu-item index="encryptTest">加解密</el-menu-item>
