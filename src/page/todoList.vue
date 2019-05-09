@@ -104,6 +104,9 @@
             this.initData();
             console.log(11111)
         },
+        computed: {
+         
+        },
     	components: {
     		headTop,
     	},
@@ -121,6 +124,9 @@
                     console.log('获取数据失败', err);
                 }
             },
+            getLocalTime(nS) {     
+                return new Date(parseInt(nS) * 1000).toLocaleString().replace(/:\d{1,2}$/,' ');     
+            },
             async getTodoList(){
                 const rtnData = await getAllTodo();
                 this.tableData =[];
@@ -128,7 +134,7 @@
                     const data = {};
                     data._id = item._id;
                     data.content = item.content;
-                    data.created_at = item.created_at;
+                    data.created_at = this.getLocalTime(item.created_at);
                     if(!item.is_finished){
                         data.isFinished = '未完成'
                     } else {
@@ -138,6 +144,7 @@
                     this.tableData.push(data);
                 });
             },
+            
             handleSizeChange(val) {
                 console.log(`每页 ${val} 条`);
             },
@@ -167,6 +174,8 @@
                             message: '删除事项成功'
                         });
                         this.tableData.splice(index, 1);
+                        const countData = await getTodoListCount();
+                        this.count = countData.count;
                     }else{
                         throw new Error(res.message)
                     }
@@ -201,7 +210,7 @@
             async handleTodo(index, row){
                 let todo = row;
                 todo.is_finished = true;
-                todo.finished_at = new Date();
+                todo.finished_at = new Date().getTime();
                 todo.isFinished = '完成';
                 row.isFinished = '完成';
                 try{
