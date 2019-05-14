@@ -24,7 +24,13 @@
 						<el-button type="primary" @click="submitForm('formData')" v-loading.fullscreen.lock="fullscreenLoading">立即测试</el-button>
 					</el-form-item>
 					<el-form-item label="返回结果">
-						<span>{{result}}</span>
+						<!-- <span>{{result}}</span> -->
+						<json-viewer
+						:value="result"
+						:expand-depth=5
+						copyable
+						boxed
+						sort></json-viewer>
 					</el-form-item>
 				</el-form>
   			</el-col>
@@ -35,7 +41,8 @@
 <script>
     import headTop from '@/components/headTop'
     import {cityGuess, addShop, searchplace, foodCategory, getMOInfo} from '@/api/getData'
-    import {baseUrl, baseImgPath} from '@/config/env'
+	import {baseUrl, baseImgPath} from '@/config/env'
+	
     export default {
     	data(){
     		return {

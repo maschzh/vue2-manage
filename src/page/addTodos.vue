@@ -9,7 +9,7 @@
 						<el-input v-model="formData.content"></el-input>
 					</el-form-item>
                     <el-form-item>
-						<el-button type="primary" @click="addTodo()">添加事项</el-button>
+						<el-button type="primary" @click="addTodo()" v-loading.fullscreen.lock="fullscreenLoading">添加事项</el-button>
 					</el-form-item>
 
                      <el-form-item label="上传店铺头像">
@@ -44,7 +44,8 @@
                     image_path:''
                 },
                 baseUrl,
-			    baseImgPath,
+				baseImgPath,
+				fullscreenLoading:false,
     		}
     	},
     	components: {
@@ -60,7 +61,9 @@
     	methods: {
 		    async addTodo(){
 			    try{
+					this.fullscreenLoading = true;
 					const result = await addTodo(this.formData);
+					this.fullscreenLoading = false
 					if (result.status == 'success') {
 						console.log(result)
 						this.$message({
